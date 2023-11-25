@@ -12,7 +12,9 @@ class Note:
         global last_id
         last_id += 1
         self.id = last_id
-
+    
+    def match(self, filter):
+        return filter in self.memo or filter in self.tags or filter in self.title
 class Notebook:
 
     def __init__(self):
@@ -35,3 +37,9 @@ class Notebook:
 
     def modify_tags(self, note_id, tags):
       self._find_note(note_id).tags = tags
+
+    def search(self, filter):
+        return [note for note in self.notes if note.match(filter)]
+    
+    def delete_note(self, note_id):
+       self.notes = [note for note in self.notes if note.id != note_id]
