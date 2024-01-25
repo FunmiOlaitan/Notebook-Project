@@ -43,3 +43,10 @@ class Notebook:
     
     def delete_note(self, note_id):
        self.notes = [note for note in self.notes if note.id != note_id]
+    
+    def show_notes(self, notes=None):
+        if not notes:
+            notes = self.notes
+        for note in notes:
+            print("{0}: {1}\n{2}".format(
+                note.id, note.tags, note.memo))
